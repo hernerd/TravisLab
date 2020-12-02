@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_se_lab.travislab" default="compile.module.se_lab.travislab">
+  <dirname property="module.se_lab.travislab.basedir" file="${ant.file.module_se_lab.travislab}"/>
+  
+  <property name="module.jdk.home.se_lab.travislab" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.se_lab.travislab" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.se_lab.travislab" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.se_lab.travislab" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="se_lab.travislab.output.dir" value="${module.se_lab.travislab.basedir}/../../out/production/SE_lab.TravisLab"/>
+  <property name="se_lab.travislab.testoutput.dir" value="${module.se_lab.travislab.basedir}/../../out/test/SE_lab.TravisLab"/>
+  
+  <path id="se_lab.travislab.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="se_lab.travislab.module.production.classpath">
+    <path refid="${module.jdk.classpath.se_lab.travislab}"/>
+  </path>
+  
+  <path id="se_lab.travislab.runtime.production.module.classpath">
+    <pathelement location="${se_lab.travislab.output.dir}"/>
+  </path>
+  
+  <path id="se_lab.travislab.module.classpath">
+    <path refid="${module.jdk.classpath.se_lab.travislab}"/>
+    <pathelement location="${se_lab.travislab.output.dir}"/>
+  </path>
+  
+  <path id="se_lab.travislab.runtime.module.classpath">
+    <pathelement location="${se_lab.travislab.testoutput.dir}"/>
+    <pathelement location="${se_lab.travislab.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.se_lab.travislab">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.se_lab.travislab">
+    <patternset refid="excluded.from.module.se_lab.travislab"/>
+  </patternset>
+  
+  
+  <target name="compile.module.se_lab.travislab" depends="compile.module.se_lab.travislab.production,compile.module.se_lab.travislab.tests" description="Compile module SE_lab.TravisLab"/>
+  
+  <target name="compile.module.se_lab.travislab.production" depends="register.custom.compilers" description="Compile module SE_lab.TravisLab; production classes"/>
+  
+  <target name="compile.module.se_lab.travislab.tests" depends="register.custom.compilers,compile.module.se_lab.travislab.production" description="compile module SE_lab.TravisLab; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.se_lab.travislab" description="cleanup module">
+    <delete dir="${se_lab.travislab.output.dir}"/>
+    <delete dir="${se_lab.travislab.testoutput.dir}"/>
+  </target>
+</project>
